@@ -18,7 +18,7 @@ export async function main(ns) {
       }
     }
     else {
-      ns.exec("bserver.js", servers[i], 1, targets[i], ns.getServerMaxRam(servers[i]), 0);
+      ns.exec("bserver.js", servers[i], 1, targets[i], ns.getServerMaxRam(servers[i]), 1);
     }
   }
 }

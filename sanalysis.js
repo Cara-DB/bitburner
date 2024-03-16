@@ -37,7 +37,7 @@ export async function main(ns) {
     hostnames.push(...ns.scan(hostnames[e]).filter(hostname => !hostnames.includes(hostname)))
   }
   for (let i in hostnames) {
-    if (ns.getServerRequiredHackingLevel(hostnames[i]) < (ns.getHackingLevel() / 2) && ns.getServerMaxMoney(hostnames[i]) > 10000000) {
+    if (ns.getServerRequiredHackingLevel(hostnames[i]) < (ns.getHackingLevel() / 2) && ns.getServerMaxMoney(hostnames[i]) > 100000000) {
       servert.push(new Server(hostnames[i], ns.getServerRequiredHackingLevel(hostnames[i]), ns.getServerMaxMoney(hostnames[i]), ns.getServerGrowth(hostnames[i])));
     }
     if (ns.getServerRequiredHackingLevel(hostnames[i]) < (ns.getHackingLevel()) && ns.getServerMaxMoney(hostnames[i]) > 10000000) {

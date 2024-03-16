@@ -3,12 +3,12 @@ export async function main(ns) {
   let hostnames = ['home'];
   let targets = [];
   ns.clear("targets.txt")
-  /** i stole this for loop */
+  /** i stold this for loop */
   for (let i = 0; i < hostnames.length; i++) {
     hostnames.push(...ns.scan(hostnames[i]).filter(hostname => !hostnames.includes(hostname)))
   }
   for (let i in hostnames) {
-    if (ns.getServerRequiredHackingLevel(hostnames[i]) < (ns.getHackingLevel() / 2) && ns.getServerMaxMoney(hostnames[i]) > 1000000000) {
+    if (ns.getServerRequiredHackingLevel(hostnames[i]) < (ns.getHackingLevel() / 2) && ns.getServerMaxMoney(hostnames[i]) > 10000000) {
       if (ns.hasRootAccess(hostnames[i]) == false) {
         ns.httpworm(hostnames[i]);
         ns.relaysmtp(hostnames[i]);

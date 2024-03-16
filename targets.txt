@@ -1,15 +1,16 @@
+zb-institute
 lexo-corp
 alpha-ent
 rho-construction
 syscore
-catalyst
 aevum-police
+catalyst
+summit-uni
 netlink
 millenium-fitness
 computek
-summit-uni
-the-hub
 rothman-uni
+the-hub
 johnson-ortho
 omega-net
 silver-helix
@@ -19,7 +20,3 @@ iron-gym
 max-hardware
 zer0
 neo-net
-harakiri-sushi
-hong-fang-tea
-nectar-net
-joesguns

@@ -25,6 +25,5 @@ export async function main(ns) {
     const cost = ns.formatNumber(ns.getPurchasedServerUpgradeCost(server, (ram * 2)) * 25);
     const amount = ns.formatPercent((ram * 2) / currentRam);
     ns.tprint(`Upgrade costs ${cost} for ${amount} more RAM. You don't have enough!`);
-    ns.tprint(currentRam, " to ", ram);
   }
 }

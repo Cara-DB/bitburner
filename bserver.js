@@ -13,11 +13,14 @@ export async function main(ns) {
   let w = NaN;
   let g1 = NaN;
   let toKill = []
+  ns.disableLog("ALL");
+  ns.enableLog("exec");
   while (true) {
     if (running === false) {
-      g = ns.exec("grow.js", server, (Math.floor(growRam / 3.75)), target);
+      await ns.sleep(1000);
+      g = ns.exec("grow.js", server, (Math.floor(growRam / 2.75)), target);
       w = ns.exec("weaken.js", server, (Math.floor(weakenRam / 1.75)), target);
-      g1 = ns.exec("grow.js", server, (Math.floor(growRam / 3.75)), target);
+      g1 = ns.exec("grow.js", server, (Math.floor(growRam / 2.75)), target);
       running = true;
     }
     if (ns.getServerMoneyAvailable(target) === ns.getServerMaxMoney(target)
@@ -36,7 +39,7 @@ export async function main(ns) {
         let weakent = ns.getWeakenTime(target);
         let growt = weakent - ns.getGrowTime(target);
         let hackt = weakent - ns.getHackTime(target);
-        let hackMoney = ns.getServerMaxMoney(target) / count;
+        let hackMoney = ns.getServerMaxMoney(target) / (count + 1);
         let threads = Math.floor(ns.hackAnalyzeThreads(target, hackMoney)) +2; //1 billion
         let levelIncrease = ns.hackAnalyzeSecurity(threads, target);
         let decrease = (1000000000 / ns.getServerMoneyAvailable(target)) + 1;
@@ -57,6 +60,7 @@ export async function main(ns) {
         running = false;
         await ns.sleep(1000);
       }
+      running = false;
       await ns.sleep(1000);
     }
     await ns.sleep(100);
