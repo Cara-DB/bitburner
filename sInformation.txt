@@ -1,0 +1,134 @@
+serverName: lexo-corp
+hackLevel: 670
+maxMoney: 19.796b
+growth: 57
+
+serverName: alpha-ent
+hackLevel: 505
+maxMoney: 17.810b
+growth: 50
+
+serverName: rho-construction
+hackLevel: 507
+maxMoney: 17.013b
+growth: 56
+
+serverName: syscore
+hackLevel: 560
+maxMoney: 13.319b
+growth: 61
+
+serverName: catalyst
+hackLevel: 427
+maxMoney: 10.511b
+growth: 50
+
+serverName: aevum-police
+hackLevel: 431
+maxMoney: 7.124b
+growth: 34
+
+serverName: netlink
+hackLevel: 404
+maxMoney: 6.875b
+growth: 47
+
+serverName: millenium-fitness
+hackLevel: 487
+maxMoney: 6.250b
+growth: 42
+
+serverName: computek
+hackLevel: 382
+maxMoney: 6.152b
+growth: 54
+
+serverName: summit-uni
+hackLevel: 446
+maxMoney: 5.865b
+growth: 60
+
+serverName: the-hub
+hackLevel: 316
+maxMoney: 4.933b
+growth: 54
+
+serverName: rothman-uni
+hackLevel: 393
+maxMoney: 4.774b
+growth: 38
+
+serverName: johnson-ortho
+hackLevel: 288
+maxMoney: 1.857b
+growth: 35
+
+serverName: omega-net
+hackLevel: 194
+maxMoney: 1.585b
+growth: 38
+
+serverName: silver-helix
+hackLevel: 150
+maxMoney: 1.125b
+growth: 30
+
+serverName: crush-fitness
+hackLevel: 233
+maxMoney: 1.060b
+growth: 33
+
+serverName: phantasy
+hackLevel: 100
+maxMoney: 600.000m
+growth: 35
+
+serverName: iron-gym
+hackLevel: 100
+maxMoney: 500.000m
+growth: 20
+
+serverName: max-hardware
+hackLevel: 80
+maxMoney: 250.000m
+growth: 30
+
+serverName: zer0
+hackLevel: 75
+maxMoney: 187.500m
+growth: 40
+
+serverName: neo-net
+hackLevel: 50
+maxMoney: 125.000m
+growth: 25
+
+serverName: harakiri-sushi
+hackLevel: 40
+maxMoney: 100.000m
+growth: 40
+
+serverName: hong-fang-tea
+hackLevel: 30
+maxMoney: 75.000m
+growth: 20
+
+serverName: nectar-net
+hackLevel: 20
+maxMoney: 68.750m
+growth: 25
+
+serverName: joesguns
+hackLevel: 10
+maxMoney: 62.500m
+growth: 20
+
+serverName: sigma-cosmetics
+hackLevel: 5
+maxMoney: 57.500m
+growth: 10
+
+serverName: foodnstuff
+hackLevel: 1
+maxMoney: 50.000m
+growth: 5
