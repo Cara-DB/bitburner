@@ -3,7 +3,7 @@ export async function main(ns) {
   let hostnames = ['home'];
   let targets = [];
   ns.clear("targets.txt")
-  /** i stold this for loop */
+  /** i stole this for loop */
   for (let i = 0; i < hostnames.length; i++) {
     hostnames.push(...ns.scan(hostnames[i]).filter(hostname => !hostnames.includes(hostname)))
   }
