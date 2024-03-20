@@ -5,9 +5,9 @@ export async function main(ns) {
   ns.disableLog("getServerMoneyAvailable");
   ns.disableLog("getServerMaxMoney");
   while (true) {
-    if (ns.getServerMoneyAvailable(target) >= (ns.getServerMaxMoney(target) / 2)) {
+    if (ns.getServerMoneyAvailable(target) >= ns.getServerMaxMoney(target) / 2) {
       await ns.hack(target);
     }
-    await ns.sleep(1000);
+    await ns.sleep(200);
   }
 }

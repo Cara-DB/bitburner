@@ -18,7 +18,7 @@ export async function main(ns) {
       for (let i in servers) {
         ns.upgradePurchasedServer(servers[i], ram);
       }
-      ns.tprint("Upgraded!");
+      ns.tprint(`Upgraded to ${ram}!`);
     }
   }
   else {
