@@ -1,0 +1,7 @@
+NetscriptDefinitions.d.ts
+*.code-workspace
+jsconfig.json
+massHomeScripts.txt
+sInformation.txt
+targets.txt
+UsableServers.txt

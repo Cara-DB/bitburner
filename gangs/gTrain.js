@@ -17,7 +17,7 @@ function Stats(member) { // How much exp a member should have
 export async function main(ns) {
   const trainees = ns.args;
   for (let i in trainees) {
-    let info = ns.gang.getMemberInformation(trainees[i]).
+    let info = ns.gang.getMemberInformation(trainees[i])
     let check = new Stats(info);
     if (check.enoughCombat()) {
       if (check.enoughHacking()) {
