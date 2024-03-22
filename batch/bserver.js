@@ -6,25 +6,25 @@ export async function main(ns) {
   let running = false;
   let growRam = Math.floor(ram * 0.7);
   let weakenRam = Math.floor(ram * 0.3);
-  let g = NaN;
-  let w = NaN;
-  let g1 = NaN;
-  let toKill = []
-  ns.disableLog("getServerMoneyAvailable");
-  ns.disableLog("getServerMaxMoney");
-  ns.disableLog("getServerSecurityLevel");
-  ns.disableLog("getServerMinSecurityLevel");
-  ns.disableLog("getServerMaxRam");
-  ns.disableLog("getServerUsedRam");
+  let g = 0;
+  let w = 0;
+  ns.disableLog("ALL");
   while (true) {
     if (running === false) {
       g = 0;
-      w = 0
-      while (g === 0 && w === 0) {
-        g = ns.exec("grow.js", server, (Math.floor(growRam / 1.75)), target);
+      w = 0;
+      g = ns.exec("grow.js", server, (Math.floor(growRam / 1.80)), target);
+      w = ns.exec("weaken.js", server, (Math.floor(weakenRam / 1.75)), target);
+      while (g === 0) {
+        g = ns.exec("grow.js", server, (Math.floor(growRam / 1.80)), target);
+        await ns.sleep(20);
+      }
+      while (w === 0) {
         w = ns.exec("weaken.js", server, (Math.floor(weakenRam / 1.75)), target);
         await ns.sleep(20);
       }
+      ns.print(g, " & ", w);
+      ns.print("Growing Server...");
       running = true;
     }
     if (ns.getServerMoneyAvailable(target) === ns.getServerMaxMoney(target)
@@ -32,7 +32,7 @@ export async function main(ns) {
       if (running) {
         ns.kill(g);
         ns.kill(w);
-        running = false;
+        ns.print("Left Growth Stage!");
       }
       let o = 0;
       while (ns.getServerMoneyAvailable(target) === ns.getServerMaxMoney(target)
@@ -50,18 +50,23 @@ export async function main(ns) {
         let hweakenThreads = Math.floor(((ns.getServerSecurityLevel(target) + (levelIncrease * 0.004)) / 0.005));
         let ramNeeded = (ns.getScriptRam("jgrow.js") * growthThreads) + (ns.getScriptRam("jhack.js") * threads) + (ns.getScriptRam("jweaken.js") * weakenThreads);
         if (o < 100 && (ns.getServerMaxRam(server) - ns.getServerUsedRam(server)) / 2 >= ramNeeded) {
-          while (o < 100 && (ns.getServerMaxRam(server) - ns.getServerUsedRam(server)) / 2 >= ramNeeded) {
-            toKill.push(ns.exec("jgrow.js", server, growthThreads, target, (growt - 50)));
-            toKill.push(ns.exec("jhack.js", server, threads, target, (hackt - 200)));
-            toKill.push(ns.exec("jweaken.js", server, weakenThreads, target, 0));
-            toKill.push(ns.exec("jweaken.js", server, hweakenThreads, target, 100));
+          ns.print("Running Cycles...");
+          let usedRam = ramNeeded;
+          while (ram - usedRam >= ramNeeded) {
+            ns.exec("jgrow.js", server, growthThreads, target, (growt - 50));
+            ns.exec("jhack.js", server, threads, target, (hackt - 200));
+            ns.exec("jweaken.js", server, weakenThreads, target, 0);
+            ns.exec("jweaken.js", server, hweakenThreads, target, 100);
             o++;
-            await ns.sleep(100);
+            await ns.sleep(60);
+            usedRam += ramNeeded;
           }
-          let sleepTime = weakent + (o * 100); // Sleeps while cycles are running
+          let sleepTime = weakent + (o * 60) - 500; // Sleeps while cycles are running
           await ns.sleep(sleepTime);
+          ns.print("Cycles Finished!");
           o = 0;
         }
+        running = false;
         await ns.sleep(20);
       }
     }

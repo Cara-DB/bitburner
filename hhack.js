@@ -6,7 +6,7 @@ export async function main(ns) {
   const target = ns.args[0];
   ns.killall(host);
   //let eachRam = Math.floor(ns.getServerMaxRam(host) / (targets.length)) + 10;
-  let eachRam = ns.getServerMaxRam(host) - 2;
+  let eachRam = ns.getServerMaxRam(host) - 8;
   let hackRam = Math.floor(eachRam * 0.1);
   if (hackRam === 0) {
     hackRam = 1;
