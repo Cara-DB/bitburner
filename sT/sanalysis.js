@@ -53,7 +53,7 @@ export async function main(ns) {
       type: "select",
       choices: ["serverName", "hackLevel", "maxMoney", "growth", "levelNeeded"]
     });
-    serverinfo = sortServers(servers, output);
+    serverinfo = sortServers(servert, output);
   }
   ns.write("UsableServers.txt", hackableServers.join("\r\n"), "w");
   servert = sortServers(servert, "maxMoney");
@@ -73,4 +73,5 @@ export async function main(ns) {
   }
   targets = targets.slice(0, 50);
   ns.write("targets.txt", targets.join("\r\n"), "w")
+  ns.tprint("Updated: targets.txt, sInformation.txt");
 }
