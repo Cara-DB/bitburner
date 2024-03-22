@@ -73,5 +73,6 @@ export async function main(ns) {
   }
   targets = targets.slice(0, 50);
   ns.write("targets.txt", targets.join("\r\n"), "w")
-  ns.tprint("Updated: targets.txt, sInformation.txt");
+  ns.tprint("Updated: targets.txt, sInformation");
+  ns.exec("st/preHack.js", "home");
 }
