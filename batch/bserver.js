@@ -2,10 +2,10 @@
 export async function main(ns) {
   const target = ns.args[0];
   const server = ns.getHostname();
-  let ram = ns.args[1] - 200;
+  let ram = ns.args[1] - 100;
   let running = false;
   let growRam = Math.floor(ram * 0.7);
-  let weakenRam = Math.floor(ram * 0.2);
+  let weakenRam = Math.floor(ram * 0.3);
   let g = NaN;
   let w = NaN;
   let g1 = NaN;
