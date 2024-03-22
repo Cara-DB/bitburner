@@ -49,20 +49,20 @@ export async function main(ns) {
         let weakenThreads = Math.floor(((ns.getServerSecurityLevel(target) + (growthThreads * 0.004)) / 0.005));
         let hweakenThreads = Math.floor(((ns.getServerSecurityLevel(target) + (levelIncrease * 0.004)) / 0.005));
         let ramNeeded = (ns.getScriptRam("jgrow.js") * growthThreads) + (ns.getScriptRam("jhack.js") * threads) + (ns.getScriptRam("jweaken.js") * weakenThreads);
-        while (o < 100 && (ns.getServerMaxRam(server) - ns.getServerUsedRam(server)) / 2 >= ramNeeded) {
-          toKill.push(ns.exec("jgrow.js", server, growthThreads, target, (growt - 50)));
-          toKill.push(ns.exec("jhack.js", server, threads, target, (hackt - 200)));
-          toKill.push(ns.exec("jweaken.js", server, weakenThreads, target, 0));
-          toKill.push(ns.exec("jweaken.js", server, hweakenThreads, target, 100));
-          o++;
-          await ns.sleep(100);
+        if (o < 100 && (ns.getServerMaxRam(server) - ns.getServerUsedRam(server)) / 2 >= ramNeeded) {
+          while (o < 100 && (ns.getServerMaxRam(server) - ns.getServerUsedRam(server)) / 2 >= ramNeeded) {
+            toKill.push(ns.exec("jgrow.js", server, growthThreads, target, (growt - 50)));
+            toKill.push(ns.exec("jhack.js", server, threads, target, (hackt - 200)));
+            toKill.push(ns.exec("jweaken.js", server, weakenThreads, target, 0));
+            toKill.push(ns.exec("jweaken.js", server, hweakenThreads, target, 100));
+            o++;
+            await ns.sleep(100);
+          }
+          await ns.sleep(weakent + (o * 100));
+          o = 0;
         }
-        await ns.sleep(weakent + (o * 100));
-        o = 0;
       }
-      running = false;
     }
-    running = false;
     await ns.sleep(100);
   }
 }
