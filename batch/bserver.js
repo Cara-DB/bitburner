@@ -10,7 +10,6 @@ export async function main(ns) {
   let w = NaN;
   let g1 = NaN;
   let toKill = []
-  ns.disableLog("sleep");
   ns.disableLog("getServerMoneyAvailable");
   ns.disableLog("getServerMaxMoney");
   ns.disableLog("getServerSecurityLevel");
@@ -61,8 +60,9 @@ export async function main(ns) {
           await ns.sleep(weakent + (o * 100));
           o = 0;
         }
+        await ns.sleep(20);
       }
     }
-    await ns.sleep(100);
+    await ns.sleep(20);
   }
 }
