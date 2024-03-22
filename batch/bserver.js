@@ -23,6 +23,7 @@ export async function main(ns) {
       while (g === 0 && w === 0) {
         g = ns.exec("grow.js", server, (Math.floor(growRam / 1.75)), target);
         w = ns.exec("weaken.js", server, (Math.floor(weakenRam / 1.75)), target);
+        await ns.sleep(20);
       }
       running = true;
     }
@@ -57,7 +58,8 @@ export async function main(ns) {
             o++;
             await ns.sleep(100);
           }
-          await ns.sleep(weakent + (o * 100));
+          let sleepTime = weakent + (o * 100); // Sleeps while cycles are running
+          await ns.sleep(sleepTime);
           o = 0;
         }
         await ns.sleep(20);
