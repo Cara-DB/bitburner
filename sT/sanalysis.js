@@ -34,6 +34,22 @@ export async function main(ns) {
   let targets = [];
   let servert = [];
   let hackableServers = [];
+  let canOpen = 0
+  if (ns.fileExists("bruteSSH.exe", "home")) {
+    canOpen++;
+  }
+  if (ns.fileExists("FTPCrack.exe", "home")) {
+    canOpen++;
+  }
+  if (ns.fileExists("HTTPWorm.exe", "home")) {
+    canOpen++;
+  }
+  if (ns.fileExists("relaySMTP.exe", "home")) {
+    canOpen++;
+  }
+  if (ns.fileExists("SQLInject.exe", "home")) {
+    canOpen++;
+  }
   for (let e = 0; e < hostnames.length; e++) {
     hostnames.push(...ns.scan(hostnames[e]).filter(hostname => !hostnames.includes(hostname)))
   }
@@ -44,7 +60,7 @@ export async function main(ns) {
     if (ns.getServerMaxMoney(hostnames[i]) === 0) {
       servers.push(new Server(hostnames[i], ns.getServerRequiredHackingLevel(hostnames[i]), ns.getServerMaxMoney(hostnames[i]), ns.getServerGrowth(hostnames[i])));
     }
-    if (ns.getServerRequiredHackingLevel(hostnames[i]) <= (ns.getHackingLevel()) && ns.getServerNumPortsRequired(hostnames[i]) < 4 && ns.getServerMaxRam(hostnames[i]) >= 16) {
+    if (ns.getServerRequiredHackingLevel(hostnames[i]) <= (ns.getHackingLevel()) && ns.getServerNumPortsRequired(hostnames[i]) <= canOpen && ns.getServerMaxRam(hostnames[i]) >= 16) {
       hackableServers.push(hostnames[i]);
     }
   }
@@ -69,9 +85,11 @@ export async function main(ns) {
   }
   ns.write("sInformation.txt", formatted.join("\r\n"), "w");
   for (let i in servert) {
-    targets.push(servert[i].serverName);
+    let server = servert[i].serverName;
+    if (ns.getServerNumPortsRequired(server) <= canOpen) {
+      targets.push(server);
+    }
   }
-  targets = targets.slice(0, 50);
   ns.write("targets.txt", targets.join("\r\n"), "w")
   ns.tprint("Updated: targets.txt, sInformation");
   ns.exec("st/preHack.js", "home");
