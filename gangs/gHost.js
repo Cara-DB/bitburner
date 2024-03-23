@@ -36,7 +36,7 @@ export async function main(ns) {
       }
       ns.exec("gangs/gTrain.js", host);
       ns.exec("gangs/gEquip.js", host);
-      await ns.sleep(20000);
+      await ns.sleep(10000);
     }
   }
 }
