@@ -27,12 +27,12 @@ export async function main(ns) {
     let count = Math.floor(ns.getServerMaxRam(servers[i]) / 200000);
     if (count >= 2) {
       let ram = Math.floor(ns.getServerMaxRam(servers[i]) / 2);
-      if (targetSplit) {
+      if (!targetSplit) {
         if (t > targets.length - 1) {
           t = 0;
         }
         ns.exec("batch/bserver.js", servers[i], 1, targets[t], ram);
-        ns.exec("batch/bserver.js", servers[i], 1, targets[t], ram);
+        ns.exec("batch/bserver.js", servers[i], 1, targets[t+1], ram);
         t += 2
       }
       else {
