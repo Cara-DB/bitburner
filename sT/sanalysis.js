@@ -58,39 +58,45 @@ export async function main(ns) {
       servert.push(new Server(hostnames[i], ns.getServerRequiredHackingLevel(hostnames[i]), ns.getServerMaxMoney(hostnames[i]), ns.getServerGrowth(hostnames[i])));
     }
     if (ns.getServerMaxMoney(hostnames[i]) === 0) {
-      servers.push(new Server(hostnames[i], ns.getServerRequiredHackingLevel(hostnames[i]), ns.getServerMaxMoney(hostnames[i]), ns.getServerGrowth(hostnames[i])));
+      servers.push(new Server(hostnames[i], ns.getServerRequiredHackingLevel(hostnames[i])));
+      servers.push("");
     }
     if (ns.getServerRequiredHackingLevel(hostnames[i]) <= (ns.getHackingLevel()) && ns.getServerNumPortsRequired(hostnames[i]) <= canOpen && ns.getServerMaxRam(hostnames[i]) >= 16) {
       hackableServers.push(hostnames[i]);
     }
   }
-  if (ns.args.length != 0) {
+  if (ns.args.length != 0) { // If player asks for server information
     const output = await ns.prompt("Please select sorting method:", {
       type: "select",
       choices: ["serverName", "hackLevel", "maxMoney", "growth", "levelNeeded"]
     });
     serverinfo = sortServers(servert, output);
   }
-  ns.write("UsableServers.txt", hackableServers.join("\r\n"), "w");
+  
+  ns.write("UsableServers.txt", hackableServers.join("\r\n"), "w"); // Servers we can hack from
+  ns.write("Honeypots.txt", servers.join("\r\n"), "w"); // Honeypots (like the CSEC server)
   servert = sortServers(servert, "maxMoney");
-  for (let i in serverinfo) {
+  for (let i in serverinfo) { // Sanatizes server list
     let change = serverinfo[i].money();
     serverinfo[i].changeMoney(ns.formatNumber(change));
     delete serverinfo[i].money;
     delete serverinfo[i].changeMoney;
     for (const [key, value] of Object.entries(serverinfo[i])) {
-      formatted.push(`${key}: ${value}`);
+      formatted.push(`${key}: ${value}`); // Makes new array
     }
     formatted.push("");
   }
   ns.write("sInformation.txt", formatted.join("\r\n"), "w");
-  for (let i in servert) {
+  for (let i in servert) { // Find targets
     let server = servert[i].serverName;
     if (ns.getServerNumPortsRequired(server) <= canOpen) {
       targets.push(server);
     }
   }
+  if (targets.length > 50) { // Removes low money servers if we have a lot of options
+    let reduceBy = targets.length - 9;
+    targets = targets.slice(0, reduceBy);
+  }
   ns.write("targets.txt", targets.join("\r\n"), "w")
-  ns.tprint("Updated: targets.txt, sInformation");
-  ns.exec("st/preHack.js", "home");
+  ns.exec("st/preHack.js", "home"); // Hacks targets and usable servers
 }
