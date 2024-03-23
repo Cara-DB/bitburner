@@ -7,6 +7,7 @@
  * - gRecruit: recruit members
  * - gAscend: ascend members
  * - gTask: set member tasks
+ * - gEquip: buy equipment & augs
  */
 /** @param {NS} ns */
 export async function main(ns) {
@@ -14,10 +15,10 @@ export async function main(ns) {
   if (ns.gang.inGang() === false) {
     // Creates gang
     let checkSuccess = ns.gang.createGang("Slum Snakes");
-    if (checkSuccess) { // Checks if successful
+    if (checkSuccess) {
       ns.tprint("Gang created!");
     }
-    else {
+    else { // usually because karma is too low
       ns.tprint("Error: Couldn't create gang.");
     }
   }
@@ -28,9 +29,14 @@ export async function main(ns) {
       ns.scp("gangs/gTask.js", host, "home");
       ns.scp("gangs/gEquip.js", host, "home");
     }
-    ns.exec("gangs/gRecruit.js", host);
     ns.exec("gangs/gAscend.js", host);
-    ns.exec("gangs/gTask.js", host);
-    ns.exec("gangs/gEquip.js", host);
+    while (true) { // task manager
+      if (ns.gang.canRecruitMember()) {
+        ns.exec("gangs/gRecruit.js", host);
+      }
+      ns.exec("gangs/gTrain.js", host);
+      ns.exec("gangs/gEquip.js", host);
+      await ns.sleep(20000);
+    }
   }
 }
