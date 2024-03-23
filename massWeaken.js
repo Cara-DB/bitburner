@@ -9,8 +9,14 @@ export async function main(ns) {
     }
     ns.rm("massHomeScripts.txt");
   }
-  let targets = ns.read("targets.txt");
-  targets = targets.split("\r\n");
+  let targets;
+  if (ns.args.length === 0) {
+    targets = ns.read("targets.txt");
+    targets = targets.split("\r\n");
+  }
+  else {
+    targets = ns.args;
+  }
   let scriptIds = [];
   let eachRam = Math.floor((ns.getServerMaxRam("home") / targets.length) * 0.95);
   for (let i in targets) {
