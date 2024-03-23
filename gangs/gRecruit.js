@@ -13,20 +13,26 @@ export async function main(ns) {
         nameGen++;
         let name = "member-" + nameGen;
         ns.gang.recruitMember(name);
-        ns.gang.setMemberTask(name, "Train Combat");
+        if (check) {
+          ns.print("Recruited a member!");
+          ns.gang.setMemberTask(name, "Train Combat");
+        }
+        else {
+          ns.print("Failed to recruit a member...");
+        }
       }
     }
     else { // Recruits only one member
-      nameGen++;
-      let name = "member-" + nameGen;
-      let check = ns.gang.recruitMember(name);
-      if (check) {
-        ns.print("Recruited a member!");
-        ns.gang.setMemberTask(name, "Train Combat");
-      }
-      else {
-        ns.print("Failed to recruit a member...");
+        nameGen++;
+        let name = "member-" + nameGen;
+        let check = ns.gang.recruitMember(name);
+        if (check) {
+          ns.print("Recruited a member!");
+          ns.gang.setMemberTask(name, "Train Combat");
+        }
+        else {
+          ns.print("Failed to recruit a member...");
+        }
       }
     }
   }
-}
