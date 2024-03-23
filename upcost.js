@@ -2,6 +2,10 @@
 export async function main(ns) {
   const currentRam = ns.getServerMaxRam("pserv-10");
   const maxRam = ns.getPurchasedServerMaxRam();
+  if (currentRam === maxRam) {
+    ns.tprint("You already have maximum server RAM!");
+    ns.exit();
+  }
   const money = ns.getPlayer().money;
   const server = "pserv-10";
   const servers = ns.getPurchasedServers();
@@ -12,13 +16,13 @@ export async function main(ns) {
   }
   if (ram > currentRam) {
     const increase = ns.formatPercent(ram / currentRam);
-    const ask = `Can upgrade by ${increase}, upgrade?`;
-    const output = await ns.prompt(ask, {"type": "boolean"});
-    if (output === true) {
-      for (let i in servers) {
-        ns.upgradePurchasedServer(servers[i], ram);
-      }
-      ns.tprint(`Upgraded to ${ram}!`);
+    for (let i in servers) {
+      ns.upgradePurchasedServer(servers[i], ram);
+    }
+    ram = ns.formatRam(ram);
+    ns.tprint(`Upgraded by ${increase} to ${ram}!`);
+    if (ram === 1048576) {
+      ns.tprint("Maximum RAM achieved!");
     }
   }
   else {
