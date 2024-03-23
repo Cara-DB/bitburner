@@ -29,7 +29,7 @@ export async function main(ns) {
     let memInfo = ns.gang.getMemberInformation(members[i]);
     if (memInfo.task === "Train Combat" || memInfo.task === "Train Hacking" || memInfo.task === "Train Charisma") {
       let check = new Stats(memInfo);
-      if (!check.enoughCharisma() && !check.enoughCombat() && !check.enoughHacking()) {
+      if (!check.enoughCharisma() || !check.enoughCombat() || !check.enoughHacking()) {
         trainees.push(members[i]);
       }
     }
