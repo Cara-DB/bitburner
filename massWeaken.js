@@ -18,7 +18,7 @@ export async function main(ns) {
     targets = ns.args;
   }
   let scriptIds = [];
-  let eachRam = Math.floor((ns.getServerMaxRam("home") / targets.length) * 0.95);
+  let eachRam = Math.floor(((ns.getServerMaxRam("home") - 8) / targets.length) * 0.95);
   for (let i in targets) {
     scriptIds.push(ns.exec("weaken.js", "home", (Math.floor((eachRam / 1.75) * 0.3)), targets[i]));
     scriptIds.push(ns.exec("grow.js", "home", (Math.floor((eachRam / 1.75) * 0.7)), targets[i]));

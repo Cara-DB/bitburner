@@ -7,3 +7,5 @@ targets.txt
 UsableServers.txt
 Honeypots.txt
 testing.js
+fserver.js
+stockMarket.js
