@@ -1,7 +1,13 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  let targets = ns.read("targets.txt");
-  targets = targets.split("\r\n");
+  let targets;
+  if (ns.args.length === 0) {
+    targets = ns.read("targets.txt");
+    targets = targets.split("\r\n");
+  }
+  else {
+    targets = ns.args;
+  }
   let servers = ns.read("UsableServers.txt");
   servers = servers.split("\r\n");
   for (let i in targets) {
