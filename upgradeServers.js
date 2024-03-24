@@ -19,10 +19,14 @@ export async function main(ns) {
     for (let i in servers) {
       ns.upgradePurchasedServer(servers[i], ram);
     }
-    ram = ns.formatRam(ram);
-    ns.tprint(`Upgraded by ${increase} to ${ram}!`);
+    let fRam = ns.formatRam(ram);
+    ns.tprint(`Upgraded by ${increase} to ${fRam}!`);
     if (ram === 1048576) {
       ns.tprint("Maximum RAM achieved!");
+    }
+    else {
+      let newCost = ns.formatNumber(ns.getPurchasedServerUpgradeCost(server, (ram * 2)) * 25);
+      ns.tprint(`Cost for next upgrade: ${newCost}`);
     }
   }
   else {
